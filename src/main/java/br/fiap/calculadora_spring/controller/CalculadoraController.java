@@ -24,9 +24,21 @@ public class CalculadoraController {
         //O método retorna uma string pois estamos retornando o index.html
         //Utilizamos o parâmetro model para retornar os dados ao navegador
 
-        BigDecimal resultado = service.calcular(valor1, valor2, operacao);
-        model.addAttribute("resultado", resultado);
+        BigDecimal resultado = null; //Utilizamos isso para que o resultado começe como null e não estoure o código no tratamento de exceção
+        String erro = ""; //Erro começa vazio porque no início da operação não tem erro
 
+        try {
+            resultado = service.calcular(valor1, valor2, operacao);
+        } catch (Exception e) {
+            erro = e.getMessage();
+        }
+
+        model.addAttribute("resultado", resultado);
+        model.addAttribute("erro", erro);
+        model.addAttribute("valor1", valor1);
+        model.addAttribute("valor2", valor2);
+        model.addAttribute("operacao", operacao);
+        //O model.addAttribute serve para retornar esses elementos para o index
         return "index";
     }
 }

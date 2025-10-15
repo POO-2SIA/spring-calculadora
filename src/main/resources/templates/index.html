@@ -3,28 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculadora do Lulu</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"> <!-- Link para o CSS -->
 </head>
 <body>
-    <h1>Calculadora Bonitona do Lulu</h1>
-    <form method="post" th:action="@{/calcular}">
-        <div>
-            <label>Valor 1</label>
-            <input type="text" name="valor1" placeholder="Ex: 12,5">
-        </div>
-        <div>
-            <label>Valor 2</label>
-            <input type="text" name="valor2" placeholder="Ex: 12,5">
-        </div>
-        <div>
-            <fieldset>
-                <legend>Escolha uma operação</legend>
-                    <label><input type="radio" name="operacao" value="soma" checked>Soma</label>
-                    <label><input type="radio" name="operacao" value="subtracao">Subtração</label>
-                    <label><input type="radio" name="operacao" value="multiplicacao">Multiplicação</label>
-                    <label><input type="radio" name="operacao" value="divisao">Divisão</label>
-            </fieldset>
-        </div>
-        <button type="submit">Calcular</button>
-    </form>
+<h1 class="title">Calculadora Bonitona do Lulu</h1>
+<form method="post" th:action="@{/calcular}" class="calculator-form">
+    <div class="input-group">
+        <label for="valor1" class="input-label">Valor 1</label>
+        <input type="text" id="valor1" name="valor1" placeholder="Ex: 12,5" th:value="${valor1}" class="input-field">
+    </div>
+    <div class="input-group">
+        <label for="valor2" class="input-label">Valor 2</label>
+        <input type="text" id="valor2" name="valor2" placeholder="Ex: 12,5" th:value="${valor2}" class="input-field">
+    </div>
+    <div class="operation-group">
+        <fieldset class="operation-fieldset">
+            <legend class="operation-legend">Escolha uma operação</legend>
+            <label class="operation-label">
+                <input type="radio" name="operacao" value="soma" checked class="operation-input"> Soma
+            </label>
+            <label class="operation-label">
+                <input type="radio" name="operacao" value="subtracao" th:checked="${operacao} == 'subtracao'" class="operation-input"> Subtração
+            </label>
+            <label class="operation-label">
+                <input type="radio" name="operacao" value="multiplicacao" th:checked="${operacao} == 'multiplicacao'" class="operation-input"> Multiplicação
+            </label>
+            <label class="operation-label">
+                <input type="radio" name="operacao" value="divisao" th:checked="${operacao} == 'divisao'" class="operation-input"> Divisão
+            </label>
+        </fieldset>
+    </div>
+    <button type="submit" class="submit-button">Calcular</button>
+</form>
+<section class="result-section" th:if="${resultado} != null">
+    <h2 class="result-title">Resultado</h2>
+    <h2><p th:text="${resultado}" class="result-text"></p></h2>
+</section>
+<section class="error-section">
+    <h2><p th:text="${erro}" class="error-text"></p></h2>
+</section>
 </body>
 </html>
