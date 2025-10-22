@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Controller //Declara que a classe é um controller
 public class CalculadoraController {
 
-    //Criamos essa variável para er acesso ao service, que é responsável pelos cálculos das operações
+    //Criamos essa variável para ter acesso ao service, que é responsável pelos cálculos das operações
     private final CalculadoraService service;
 
     //Usamos o construtor para inicializar o service
